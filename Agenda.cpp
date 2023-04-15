@@ -163,6 +163,7 @@ int main(int argc, char** argv)
 	*/
 	
 	int telefone, dia, mes, ano, dialimite = 31;
+	double mediaidade=0;
 	bool valido;
 	string nome, email;
 
@@ -235,15 +236,31 @@ int main(int argc, char** argv)
 		nasc->setMes(mes);
 		nasc->setAno(ano);
 		
-		contatos[i] = new Contato(nome, email, telefone, nasc);
+		contatos[i] = new Contato(nome, email, telefone, *nasc);
+		mediaidade += contatos[i]->idade(*nasc);
 		
 		cin.ignore();
 		
 		cout << "Contato " << nome << " criado." << endl;
 		cout << endl;
 	}
+
+	mediaidade /= 10;
+	string maisvelhos[10];
+
+	for(int i=0;i<10;i++)
+	{
+		int id = contatos[i]->idade(contatos[i]->getDtNasc());
+
+		if(id>mediaidade)
+		{
+			maisvelhos[i] = contatos[i]->getNome();
+		}
+	}
 	
 	cout << "==================================" << endl;
+
+	cout << "Media idade: " << mediaidade << " anos." << endl;
 	
 	for(int i=0; i<10; i++)
 	{
