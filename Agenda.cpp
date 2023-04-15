@@ -162,7 +162,7 @@ int main(int argc, char** argv)
 		hoje->setAno(2023);
 	*/
 	
-	int telefone, dia, mes, ano, dialimite = 31;
+	int telefone, dia, mes, ano, dialimite = 31, maiordeidade=0, maisvelho=-1;
 	double mediaidade=0;
 	bool valido;
 	string nome, email;
@@ -238,6 +238,11 @@ int main(int argc, char** argv)
 		
 		contatos[i] = new Contato(nome, email, telefone, *nasc);
 		mediaidade += contatos[i]->idade(*nasc);
+
+		if(contatos[i]->idade(*nasc) >=18)
+		{
+			maiordeidade++;
+		}
 		
 		cin.ignore();
 		
@@ -245,8 +250,11 @@ int main(int argc, char** argv)
 		cout << endl;
 	}
 
+	cout << "==================================" << endl;
+
 	mediaidade /= 10;
-	string maisvelhos[10];
+
+	cout << "Contatos com idade maior que a média: ";
 
 	for(int i=0;i<10;i++)
 	{
@@ -254,10 +262,13 @@ int main(int argc, char** argv)
 
 		if(id>mediaidade)
 		{
-			maisvelhos[i] = contatos[i]->getNome();
+			cout << contatos[i]->getNome() << ", ";
 		}
 	}
-	
+	cout << endl;
+
+	cout << "Qtd de contatos maiores de idade: " << maiordeidade << endl;
+
 	cout << "==================================" << endl;
 
 	cout << "Media idade: " << mediaidade << " anos." << endl;
