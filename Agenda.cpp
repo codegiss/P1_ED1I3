@@ -239,7 +239,12 @@ int main(int argc, char** argv)
 		contatos[i] = new Contato(nome, email, telefone, *nasc);
 		mediaidade += contatos[i]->idade(*nasc);
 
-		if(contatos[i]->idade(*nasc) >=18)
+		if (contatos[i]->idade(*nasc) > maisvelho)
+		{
+			maisvelho = contatos[i]->idade(*nasc);
+		}
+
+		if (contatos[i]->idade(*nasc) >= 18)
 		{
 			maiordeidade++;
 		}
@@ -265,9 +270,23 @@ int main(int argc, char** argv)
 			cout << contatos[i]->getNome() << ", ";
 		}
 	}
+
 	cout << endl;
 
 	cout << "Qtd de contatos maiores de idade: " << maiordeidade << endl;
+
+	cout << "Contato(s) mais velho(s): " << endl;
+
+	for (int i = 0; i < 10; i++)
+	{
+		if (contatos[i]->idade(contatos[i]->getDtNasc()) == maisvelho)
+		{
+			cout << "Nome: " << contatos[i]->getNome();
+			cout << "Email: " << contatos[i]->getEmail();
+			cout << "Telefone: " << contatos[i]->getTelefone();
+			cout << endl;
+		}
+	}
 
 	cout << "==================================" << endl;
 
